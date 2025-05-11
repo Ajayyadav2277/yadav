@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IIITS Restaurant </title>
+    <style>
+        :root {
+            --primary-color: #9c4b25;
+            --secondary-color: #f8f4e3;
+            --text-color: #333;
+            --light-accent: #eadfc8;
+            --dark-accent: #614124;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            padding: 1rem 0;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        nav {
+            background-color: var(--dark-accent);
+            padding: 1rem 0;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .hero {
+            height: 400px;
+            background-image: url('https://wallpapercave.com/wp/wp1874155.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--dark-accent);
+        }
+
+        .menu-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item h3 {
+            margin-top: 0;
+        }
+
+        .price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .staff-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .staff-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .staff-info {
+            padding: 1rem;
+        }
+
+        .staff-info h3 {
+            margin-top: 0;
+        }
+
+        .location-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .map {
+            background-color: #eee;
+            height: 400px;
+            background-image: url('/api/placeholder/600/400');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .location-info {
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .offers-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .offer-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .offer-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .offer-content {
+            padding: 1.5rem;
+        }
+
+        .offer-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .contact-form {
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+        }
+
+        .contact-info {
+            padding: 2rem;
+            background-color: var(--light-accent);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item i {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--dark-accent);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            margin: 0 1rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            color: white;
+            text-align: center;
+            line-height: 40px;
+            transition: background-color 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--dark-accent);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Admin Dashboard Styles */
+        .admin-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+
+        .admin-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 2rem;
+        }
+
+        .admin-tab {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .admin-tab.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        table th, table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: var(--light-accent);
+            font-weight: bold;
+        }
+
+        .admin-form {
+            margin-bottom: 2rem;
+        }
+
+        .admin-form h3 {
+            margin-bottom: 1rem;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .admin-actions button {
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .edit-btn {
+            background-color: #4b9cd3;
+            color: white;
+        }
+
+        .delete-btn {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .location-section,
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+            .footer-section {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">IIITS Restaurant</div>
+        <p>Experience Culinary Excellence</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#staff">Our Team</a></li>
+            <li><a href="#location">Location</a></li>
+            <li><a href="#offers">Special Offers</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#admin" id="admin-link">Admin</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Welcome to IIITS Restaurant</h1>
+            <p>Indulge in a culinary journey of exquisite flavors and exceptional service. Our award-winning chefs create masterpieces that delight the senses.</p>
+            <a href="#menu" class="btn">Explore Our Menu</a>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="menu">
+            <h2>Our Menu</h2>
+            <p>Explore our diverse selection of culinary creations made with the freshest ingredients.</p>
+            
+            <div class="menu-section">
+                <div class="menu-item">
+                    <img src="https://media.istockphoto.com/id/482964545/photo/arrabiata-pasta.jpg?s=1024x1024&w=is&k=20&c=WV35LbX2fkLqb2jYSPqFQcyN0OlbF_HAJ0tWbfQ9KzA=" alt=" Pasta">
+                    <div class="menu-item-content">
+                        <h3> Pasta</h3>
+                        <p>Handmade pasta with truffle cream sauce, topped with shaved parmesan and fresh herbs.</p>
+                        <p class="price">Rs  50</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://hungryforever.net/wp-content/uploads/2017/07/veg-maggi-recipe.jpg" alt="Maggi">
+                    <div class="menu-item-content">
+                        <h3>Maggi</h3>
+                        <p>Norwegian noodles to perfection, served with sautéed pea and lemon butter sauce.</p>
+                        <p class="price">RS  30</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://tse4.mm.bing.net/th?id=OIP.5Uy24Pb452yEhu33kGytGQHaF6&pid=Api&P=0&h=180" alt="Tea">
+                    <div class="menu-item-content">
+                        <h3>Tea</h3>
+                        <p>Premium milk used to make the tea.</p>
+                        <p class="price">RS 20</p>
+                    </div>
+                </div>
+                
+                <div class="menu-item">
+                    <img src="https://samirsindiankitchen.com.au/wp-content/uploads/2020/03/samosa-recipe-step-by-step-instructions-1536x1464.jpg" alt="Samosa">
+                    <div class="menu-item-content">
+                        <h3>Samosa</h3>
+                        <p>Creamy , Sauces.</p>
+                        <p class="price">RS  20</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="#" class="btn">View Full Menu</a>
+            </div>
+        </section>
+
+        <section id="staff">
+            <h2>Meet Our Team</h2>
+            <p>The talented individuals who make your dining experience exceptional.</p>
+            
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <img src="https://www.escoffier.edu/wp-content/uploads/2019/11/Chef-standing-with-his-arms-crossed-in-a-kitchen-in-front-of-pots-and-pans-768.jpg" alt="Chef Rahul Kumar">
+                    <div class="staff-info">
+                        <h3>Rahul Kumar</h3>
+                        <p>Executive Chef</p>
+                        <p>With 15 years of experience in world-class restaurants, Chef Rahul brings innovation and passion to every dish.</p>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <img src="https://c8.alamy.com/comp/2H3G0KN/cheerful-chef-smiling-and-holding-three-plates-with-different-food-isolated-on-white-background-2H3G0KN.jpg" alt="Vivek Kumar">
+                    <div class="staff-info">
+                        <h3>Vivek Kumar</h3>
+                        <p>Pastry Chef</p>
+                        <p>A master of desserts, Vivek creates stunning sweet creations that are as beautiful as they are delicious.</p>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <img src="https://i.pinimg.com/736x/cb/f2/07/cbf20793af84e1579c2d1d83f91994a5.jpg" alt="Ajay Kumar">
+                    <div class="staff-info">
+                        <h3>Ajay Kumar</h3>
+                        <p>Restaurant Manager</p>
+                        <p>Ajay  ensures that every aspect of your dining experience meets our high standards of excellence.</p>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <img src="https://www.optimamandiriglobal.id/wp-content/uploads/2022/10/abt.jpg" alt="Dinesh Kumarr">
+                    <div class="staff-info">
+                        <h3>Dinesh Kumar</h3>
+                        <p>Head Sommelier</p>
+                        <p>With an extensive knowledge of wines, Dinesh will help you find the perfect pairing for your meal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="location">
+            <h2>Find Us</h2>
+            <div class="location-section">
+                <div class="map">
+                    <!-- Map placeholder -->
+                </div>
+                <div class="location-info">
+                    <h3>Our Location</h3>
+                    <p><strong>Address:</strong> Palari,Bahalghar District-Sonepat, Harayana</p>
+                    <p><strong>Hours:</strong></p>
+                    <ul>
+                        <li>Monday - Thursday: 11:00 AM - 10:00 PM</li>
+                        <li>Friday - Saturday: 11:00 AM - 11:00 PM</li>
+                        <li>Sunday: 10:00 AM - 9:00 PM (Brunch served until 2:00 PM)</li>
+                    </ul>
+                    <p><strong>Parking:</strong> In the Campus of SBIT College.</p>
+                    <p><strong>Public Transportation:</strong> Roadways Bus routes 15 and 22 stop directly in front.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="offers">
+            <h2>Special Offers</h2>
+            <p>Exclusive deals and seasonal promotions to enhance your dining experience.</p>
+            
+            <div class="offers-section">
+                <div class="offer-card">
+                    <img src="https://wallpaperaccess.com/full/3912047.jpg" alt="Happy Hour">
+                    <div class="offer-badge">Limited Time</div>
+                    <div class="offer-content">
+                        <h3>Happy Hour Special</h3>
+                        <p>Enjoy 50% off select appetizers and signature cocktails, Monday through Thursday from 4:00 PM to 6:00 PM.</p>
+                        <p><strong>Valid until:</strong> May 31, 2025</p>
+                    </div>
+                </div>
+                
+                <div class="offer-card">
+                    <img src="https://assets2.devourtours.com/wp-content/uploads/pexels-jep-gambardella-5083896.jpg" alt="Date Night">
+                    <div class="offer-badge">Popular</div>
+                    <div class="offer-content">
+                        <h3>Date Night Package</h3>
+                        <p>A romantic dinner for two including appetizer, two main courses, dessert to share, and a bottle of select wine for Rs 800.</p>
+                        <p><strong>Available:</strong> Every Friday</p>
+                    </div>
+                </div>
+                
+                <div class="offer-card">
+                    <img src="https://d1csarkz8obe9u.cloudfront.net/posterpreviews/steak-sunday-offer-design-template-36cff7e53366c451cc0c81229b66db90_screen.jpg?ts=1720177580" alt="Sunday Brunch">
+                    <div class="offer-badge">Weekly</div>
+                    <div class="offer-content">
+                        <h3>Sunday Brunch Buffet</h3>
+                        <p>All-you-can-eat gourmet brunch with complimentary mimosa or bloody mary for Rs 450 per person.</p>
+                        <p><strong>Time:</strong> Sundays, 10:00 AM - 2:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <div class="contact-section">
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+                
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-info-item">
+                        <i>📞</i>
+                        <div>
+                            <p><strong>Reservations:</strong> (555) 123-4567</p>
+                            <p><strong>General Inquiries:</strong> (555) 765-4321</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i>✉</i>
+                        <div>
+                            <p><strong>Reservations:</strong>iiitsrestaurant@gmail.com</p>
+                            <p><strong>Events:</strong> iiitsrestaurant@gmail.com</p>
+                            <p><strong>Customer Service:</strong> iiitsrestaurant@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i>📑</i>
+                        <div>
+                            <p>For private events and catering services, please contact our events team.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section (Hidden by default) -->
+        <section id="admin" class="admin-section" style="display: none;">
+            <h2>Restaurant Management System</h2>
+            
+            <div class="admin-tabs">
+                <div class="admin-tab active" data-tab="staff-management">Staff Management</div>
+                <div class="admin-tab" data-tab="customer-details">Customer Details</div>
+                <div class="admin-tab" data-tab="billing-system">Billing System</div>
+                <div class="admin-tab" data-tab="menu-management">Menu Management</div>
+            </div>
+            
+            <div id="staff-management" class="admin-content active">
+                <div class="admin-form">
+                    <h3>Add New Staff Member</h3>
+                    <form id="staffForm">
+                        <div class="form-group">
+                            <label for="staffName">Name</label>
+                            <input type="text" id="staffName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffPosition">Position</label>
+                            <input type="text" id="staffPosition" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffContact">Contact Number</label>
+                            <input type="tel" id="staffContact" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffEmail">Email</label>
+                            <input type="email" id="staffEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="staffJoined">Date Joined</label>
+                            <input type="date" id="staffJoined" required>
+                        </div>
+                        <button type="submit" class="btn">Add Staff</button>
+                    </form>
+                </div>
+                
+                <h3>Staff List</h3>
+                <table id="staffTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Date Joined</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Rahul Kumar</td>
+                            <td>Executive Chef</td>
+                            <td>(555) 123-7890</td>
+                            <td>rahul@gmail.com</td>
+                            <td>2020-05-12</td>
+                            <td class="admin-actions">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Vivek kumar</td>
+                            <td>Pastry Chef</td>
+                            <td>(555) 123-4567</td>
+                            <td>vivek@gmail.com</td>
+                            <td>2021-03-15</td>
+                            <td class="admin-actions">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ajay Kumar</td>
+                            <td>Restaurant Manager</td>
+                            <td>(555) 987-6543</td>
+                            <td>ajays@gmail.com</td>
+                            <td>2019-11-20</td>
+                            <td class="admin-actions">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Dinesh Kumar</td>
+                            <td>Head Sommelier</td>
+                            <td>(555) 234-5678</td>
+                            <td>Dinesh@gmail.com</td>
+                            <td>2022-01-10</td>
+                            <td class="admin-actions">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div id="customer-details" class="admin-content">
+                <div class="admin-form">
+                    <h3>Add New Customer</h3>
+                    <form id="customerForm">
+                        <div class="form-group">
+                            <label for="customerName">Name</label>
+                            <input type="text" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerContact">Contact Number</label>
+                            <input type="tel" id="customerContact" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">Email</label>
+                            <input type="email" id="customerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPreferences">Preferences/Notes</label>
+                            <textarea id="customerPreferences"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Add Customer</button>
+                    </form>
+                </div>
+                
+                <h3>Daily Customer List</h3>
+                <table id="customerTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Email</th>
+                            <th>Date Visited</th>
+                            <th>Table Number</th>
+                            <th>Bill Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>(555) 111-2222</td>
+                            <td>john@example.com</td>
+                            <td>2025-04-13</td>
+                            <td>5</td>
+                            <td>Rs 125</td>
+                            <td class="admin-actions">
+                                <button class="edit-btn">Edit</button>
+                                <button class="delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Smith</td>
+                            <td>(555) 333-4444</td>
+                            <td>sarah@example.com</td>
+                            <td>2025-04-13</td>
+                            <td>7</td>
+                            <td>Rs 98
